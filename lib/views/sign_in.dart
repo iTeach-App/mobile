@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iteach/views/welcome_back.dart';
 import 'package:iteach/components/round_button.dart';
+
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -10,17 +11,20 @@ class SignInPage extends StatelessWidget {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            IconButton(
-              alignment: Alignment.topLeft,
-              icon: Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
             Container(
               alignment: Alignment.topCenter,
               padding: EdgeInsets.only(
@@ -78,7 +82,7 @@ class SignInPage extends StatelessWidget {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.01), // Added spacing
+                  SizedBox(height: screenHeight * 0.01),
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
@@ -89,14 +93,14 @@ class SignInPage extends StatelessWidget {
                         'Password dimenticata?',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue, // You can change the color as desired
+                          color: Colors.blue,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.02), // Added spacing
+                  SizedBox(height: screenHeight * 0.02),
                   Container(
-                    width: double.infinity, // Span from one edge to the other
+                    width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -105,10 +109,10 @@ class SignInPage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF0079D2), // Background color
-                        onPrimary: Colors.white, // Text color
+                        primary: Color(0xFF0079D2),
+                        onPrimary: Colors.white,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(screenWidth * 0.15), // Rounded corners
+                          borderRadius: BorderRadius.circular(screenWidth * 0.15),
                         ),
                       ),
                       child: Padding(
@@ -117,7 +121,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: screenHeight * 0.04), // Added spacing
+                  SizedBox(height: screenHeight * 0.04),
                   Stack(
                     alignment: Alignment.center,
                     children: [
@@ -129,9 +133,9 @@ class SignInPage extends StatelessWidget {
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
                             colors: [
-                              Colors.transparent, // Fade in from the left
-                              Colors.black, // Line color in the middle
-                              Colors.transparent, // Fade out to the right
+                              Colors.transparent,
+                              Colors.black,
+                              Colors.transparent,
                             ],
                           ),
                         ),
@@ -150,7 +154,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.10), // Added spacing
+                  SizedBox(height: screenHeight * 0.10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -159,21 +163,21 @@ class SignInPage extends StatelessWidget {
                         onPressed: () {
                           // Handle button 1 press
                         },
-                        screenWidth: screenWidth, // Pass the screenWidth to RoundButton
+                        screenWidth: screenWidth,
                       ),
                       RoundButton(
                         imageAsset: 'assets/images/Facebook - Original.jpg',
                         onPressed: () {
                           // Handle button 2 press
                         },
-                        screenWidth: screenWidth, // Pass the screenWidth to RoundButton
+                        screenWidth: screenWidth,
                       ),
                       RoundButton(
                         imageAsset: 'assets/images/Linkedin - Original.jpg',
                         onPressed: () {
                           // Handle button 3 press
                         },
-                        screenWidth: screenWidth, // Pass the screenWidth to RoundButton
+                        screenWidth: screenWidth,
                       ),
                     ],
                   ),
