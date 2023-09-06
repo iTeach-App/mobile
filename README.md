@@ -1,4 +1,4 @@
-# iteach_ui
+# iTeach
 
 A new Flutter project.
 
