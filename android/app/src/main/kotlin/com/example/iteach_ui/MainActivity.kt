@@ -1,4 +1,4 @@
-package it.iteachapp.iteach_ui
+package it.iteachapp.iteach
 
 import io.flutter.embedding.android.FlutterActivity
 
