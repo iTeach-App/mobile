@@ -12,7 +12,7 @@ class TutorSignUpPage extends StatelessWidget {
           children: [
             IconButton(
               alignment: Alignment.topLeft,
-              icon: Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
                 Navigator.pop(context);
               },
