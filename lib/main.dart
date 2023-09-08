@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iteach/views/loading.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  await initializeApp();
   runApp(const MaterialApp(
-    title: 'Navigation Basics',
+    title: 'iTeach',
     home: LoadingPage(),
   ));
+}
+
+Future<void> initializeApp() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 
