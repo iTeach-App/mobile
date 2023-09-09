@@ -4,7 +4,7 @@ class RoundButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double screenWidth; // Declare screenWidth as a property
 
-  RoundButton({required this.imageAsset, required this.onPressed, required this.screenWidth});
+  const RoundButton({super.key, required this.imageAsset, required this.onPressed, required this.screenWidth});
 
   @override
   Widget build(BuildContext context) {

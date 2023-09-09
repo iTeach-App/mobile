@@ -50,16 +50,15 @@ class LoginPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.white, // Background color
-                onPrimary: Color(0xFF7643B5), // Text color (purple)
+                foregroundColor: const Color(0xFF7643B5), backgroundColor: Colors.white, // Text color (purple)
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0), // Rounded corners
-                  side: BorderSide(color: Color(0xFF7643B5)), // Border color
+                  side: const BorderSide(color: Color(0xFF7643B5)), // Border color
                 ),
                 minimumSize: Size(buttonWidth, 0), // Set the minimum button width
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Text('Registrati come Tutor', style: TextStyle(fontSize: 18)),
               ), // <-- SEE HERE
             ),
@@ -78,16 +77,15 @@ class LoginPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.white, // Background color
-                onPrimary: Color(0xFF7643B5), // Text color (purple)
+                foregroundColor: const Color(0xFF7643B5), backgroundColor: Colors.white, // Text color (purple)
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0), // Rounded corners
-                  side: BorderSide(color: Color(0xFF7643B5)), // Border color
+                  side: const BorderSide(color: Color(0xFF7643B5)), // Border color
                 ),
                 minimumSize: Size(buttonWidth, 0), // Set the minimum button width
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Text('Registrati come Studente', style: TextStyle(fontSize: 18)),
               ), // <-- SEE HERE
             ),
@@ -106,16 +104,15 @@ class LoginPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF0079D2), // Background color (blue)
-                onPrimary: Colors.white, // Text color
+                foregroundColor: Colors.white, backgroundColor: const Color(0xFF0079D2), // Text color
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0), // Rounded corners
-                  side: BorderSide(color: Color(0xFF0079D2)), // Border color
+                  side: const BorderSide(color: Color(0xFF0079D2)), // Border color
                 ),
                 minimumSize: Size(buttonWidth, 0), // Set the minimum button width
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
                 child: Text('Accedi', style: TextStyle(fontSize: 18)),
               ), // <-- SEE HERE
             ),
