@@ -5,10 +5,10 @@ class LecturesPage extends StatefulWidget {
   const LecturesPage({Key? key}) : super(key: key);
 
   @override
-  _LecturesPageState createState() => _LecturesPageState();
+  LecturesPageState createState() => LecturesPageState();
 }
 
-class _LecturesPageState extends State<LecturesPage> {
+class LecturesPageState extends State<LecturesPage> {
   List<Map<String, dynamic>> lectureDataList = []; // To store the data from CreateLecturePage
 
   @override
@@ -16,7 +16,7 @@ class _LecturesPageState extends State<LecturesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           'Le mie lezioni',
           textAlign: TextAlign.center,
           style: TextStyle(
@@ -25,7 +25,7 @@ class _LecturesPageState extends State<LecturesPage> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -60,7 +60,7 @@ class _LecturesPageState extends State<LecturesPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Lezioni',
@@ -92,7 +92,7 @@ class _LecturesPageState extends State<LecturesPage> {
             });
           }
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -102,12 +102,12 @@ class LectureContainer extends StatelessWidget {
   final Map<String, dynamic> data;
   final VoidCallback onDelete;
 
-  LectureContainer({required this.data, required this.onDelete});
+  const LectureContainer({super.key, required this.data, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       color: Colors.grey.withOpacity(0.2),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +117,7 @@ class LectureContainer extends StatelessWidget {
             children: [
               Text('Title: ${data['title']}'),
               IconButton(
-                icon: Icon(Icons.close), // X button icon
+                icon: const Icon(Icons.close), // X button icon
                 onPressed: onDelete,
               ),
             ],

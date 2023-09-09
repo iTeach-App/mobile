@@ -15,7 +15,7 @@ class SignInPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -46,7 +46,7 @@ class SignInPage extends StatelessWidget {
                           color: Colors.black,
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: screenWidth * 0.6,
                         child: Text(
                           'Accedi con il tuo indirizzo email oppure tramite i pulsanti social sottostanti.',
@@ -69,7 +69,7 @@ class SignInPage extends StatelessWidget {
                 children: [
                   TextFormField(
                     initialValue: 'Input',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Email',
                       border: OutlineInputBorder(),
                     ),
@@ -77,7 +77,7 @@ class SignInPage extends StatelessWidget {
                   SizedBox(height: screenHeight * 0.02),
                   TextFormField(
                     initialValue: 'Input',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(),
                     ),
@@ -89,7 +89,7 @@ class SignInPage extends StatelessWidget {
                       onPressed: () {
                         // Handle the "Password dimenticata?" action here
                       },
-                      child: Text(
+                      child: const Text(
                         'Password dimenticata?',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class SignInPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
@@ -109,8 +109,7 @@ class SignInPage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF0079D2),
-                        onPrimary: Colors.white,
+                        foregroundColor: Colors.white, backgroundColor: const Color(0xFF0079D2),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(screenWidth * 0.15),
                         ),
@@ -128,7 +127,7 @@ class SignInPage extends StatelessWidget {
                       Container(
                         height: 1.0,
                         margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,

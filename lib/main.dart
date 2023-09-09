@@ -27,17 +27,17 @@ class StyledTextInputBox extends StatelessWidget {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
           ),
-          SizedBox(height: 8.0), // Add spacing between label and input field
+          const SizedBox(height: 8.0), // Add spacing between label and input field
           TextField(
             decoration: InputDecoration(
               hintText: hintText,
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
             ),
           ),
         ],
@@ -60,7 +60,7 @@ class TextInputBox extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hintText,
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
       ),
     );

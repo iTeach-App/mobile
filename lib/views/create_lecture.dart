@@ -6,14 +6,14 @@ class CreateLecturePage extends StatefulWidget {
   const CreateLecturePage({Key? key, this.initialData}) : super(key: key);
 
   @override
-  _CreateLecturePageState createState() => _CreateLecturePageState();
+  CreateLecturePageState createState() => CreateLecturePageState();
 }
 
-class _CreateLecturePageState extends State<CreateLecturePage> {
-  TextEditingController _titleController = TextEditingController();
-  TextEditingController _subjectController = TextEditingController();
-  TextEditingController _myAddressController = TextEditingController();
-  TextEditingController _moneyForMoving = TextEditingController();
+class CreateLecturePageState extends State<CreateLecturePage> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _subjectController = TextEditingController();
+  final TextEditingController _myAddressController = TextEditingController();
+  final TextEditingController _moneyForMoving = TextEditingController();
 
   bool online = false;
   bool casaMia = false;
@@ -40,7 +40,7 @@ class _CreateLecturePageState extends State<CreateLecturePage> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.black,
           ),
@@ -48,7 +48,7 @@ class _CreateLecturePageState extends State<CreateLecturePage> {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Crea Lezione',
           style: TextStyle(
             fontSize: 20,
@@ -61,7 +61,7 @@ class _CreateLecturePageState extends State<CreateLecturePage> {
               // Add your functionality for the right text button here
               _saveAndPop(); // Call this function to save the data and pop the page
             },
-            child: Text(
+            child: const Text(
               'Conferma',
               style: TextStyle(
                 color: Color(0xFF0060A8),
@@ -80,108 +80,108 @@ class _CreateLecturePageState extends State<CreateLecturePage> {
                 children: [
                   TextFormField(
                     controller: _titleController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Titolo dell\'annuncio',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
+                  const SizedBox(height: 8.0),
+                  const Text(
                     '*required',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     controller: _subjectController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Materia',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
+                  const SizedBox(height: 8.0),
+                  const Text(
                     '*required',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     initialValue: 'Input',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Tipo di annuncio',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
+                  const SizedBox(height: 8.0),
+                  const Text(
                     '*required',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     initialValue: 'Input',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Prezzo all\'ora',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
+                  const SizedBox(height: 8.0),
+                  const Text(
                     '*required',
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 12.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   // New "Disponibilità" text box
-                  Text(
+                  const Text(
                     'Disponibilità',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   // Three tickable options with descriptions on the left and checkboxes on the right
                   buildCheckboxOption('Online', online, (value) {
                     setState(() {
                       online = value ?? false;
                     });
                   }),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   buildCheckboxOption('A casa mia', casaMia, (value) {
                     setState(() {
                       casaMia = value ?? false;
                     });
                   }),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   buildCheckboxOption('Posso spostarmi', possoSpostarmi, (value) {
                     setState(() {
                       possoSpostarmi = value ?? false;
                     });
                   }),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   // Two additional text input boxes with the same style
                   TextFormField(
                     controller: _myAddressController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Il mio indirizzo',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   TextFormField(
                     controller: _moneyForMoving,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Incremento per lo spostamento',
                       border: OutlineInputBorder(),
                     ),
@@ -203,7 +203,7 @@ class _CreateLecturePageState extends State<CreateLecturePage> {
         Checkbox(
           value: value,
           onChanged: onChanged,
-          activeColor: Color(0xFF7643B5), // Set the custom checkmark color
+          activeColor: const Color(0xFF7643B5), // Set the custom checkmark color
         ),
       ],
     );

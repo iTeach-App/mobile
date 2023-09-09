@@ -11,7 +11,7 @@ class StudentSignUpPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -29,7 +29,7 @@ class StudentSignUpPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
+                    const Text(
                       'Registrati!',
                       style: TextStyle(
                         fontSize: 24,
@@ -38,8 +38,8 @@ class StudentSignUpPage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 16.0),
-                    Text(
+                    const SizedBox(height: 16.0),
+                    const Text(
                       'Compila i campi sottostanti per registrarti gratuitamente come utente e scoprire i tutori nella tua zona!',
                       style: TextStyle(
                         fontSize: 16,
@@ -47,55 +47,55 @@ class StudentSignUpPage extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 32.0),
+                    const SizedBox(height: 32.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Nome',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Cognome',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Data di nascita',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'E-mail',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     TextFormField(
                       initialValue: 'Input',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Ripeti password',
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(height: 24.0),
+                    const SizedBox(height: 24.0),
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
@@ -105,14 +105,13 @@ class StudentSignUpPage extends StatelessWidget {
                           );
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Color(0xFF0079D2),
-                          onPrimary: Colors.white,
+                          foregroundColor: Colors.white, backgroundColor: const Color(0xFF0079D2),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
+                        child: const Padding(
+                          padding: EdgeInsets.all(12.0),
                           child: Text('Registrati come Studente', style: TextStyle(fontSize: 18)),
                         ),
                       ),
