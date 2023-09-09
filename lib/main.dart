@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iteach/views/loading.dart';
-void main() {
+
+Future<void> main() async {
   runApp(const MaterialApp(
-    title: 'Navigation Basics',
+    title: 'iTeach',
     home: LoadingPage(),
   ));
 }
-
 
 class StyledTextInputBox extends StatelessWidget {
   final String label;

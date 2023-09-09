@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "248364774445",
+    "project_id": "iteach-420",
+    "storage_bucket": "iteach-420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248364774445:android:72e597f4c6e16b9296b4a4",
+        "android_client_info": {
+          "package_name": "com.example.iteach_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcD6DavtH_uqTJUuJlLzh6O3MHou_Ar8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "248364774445-b0dih8jmm2om5fsulqeu2csmarculpdc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.iteachapp.iteachUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248364774445:android:8291dad1a47d1a8a96b4a4",
+        "android_client_info": {
+          "package_name": "it.iteachapp.iteach"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcD6DavtH_uqTJUuJlLzh6O3MHou_Ar8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "248364774445-b0dih8jmm2om5fsulqeu2csmarculpdc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.iteachapp.iteachUi"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248364774445:android:58150178ece970f596b4a4",
+        "android_client_info": {
+          "package_name": "it.iteachapp.iteach_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcD6DavtH_uqTJUuJlLzh6O3MHou_Ar8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248364774445-t9g58ltmqq4bs1ffoimjtmegvsbju76p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "248364774445-b0dih8jmm2om5fsulqeu2csmarculpdc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.iteachapp.iteachUi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
