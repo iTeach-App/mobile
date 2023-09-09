@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:iteach/services/loading.dart';
 import 'package:iteach/views/login.dart';
 class LoadingPage extends StatelessWidget {
   const LoadingPage({super.key});
   @override
   Widget build(BuildContext context) {
+    Future<void> loading = LoadingService().initializeApp();
+    // go to login page loading is done
+    loading.then((value) => Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginPage()),
+    ));
+
     return MaterialApp(
       home: Scaffold(
         body: Builder( // Use Builder widget to obtain a valid BuildContext
@@ -13,14 +21,14 @@ class LoadingPage extends StatelessWidget {
               children: [
                 // Background color
                 Container(
-                  color: Color(0xFF0079D2),
+                  color: const Color(0xFF0079D2),
                 ),
 
                 // First child (Text widget)
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.width, // Set full width
-                  child: Align(
+                  child: const Align(
                     alignment: Alignment.center, // Center horizontally
                     child: Text(
                       'iTeach',
@@ -32,7 +40,7 @@ class LoadingPage extends StatelessWidget {
                 Positioned(
                   top: MediaQuery.of(context).size.height * 0.65,
                   width: MediaQuery.of(context).size.width, // Set full width
-                  child: Align(
+                  child: const Align(
                     alignment: Alignment.center, // Center horizontally
                     child: SpinKitCircle(
                       color: Colors.white,
@@ -46,8 +54,6 @@ class LoadingPage extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center, // Center horizontally
                     child: ElevatedButton(
-                      child: const Text('Loading',
-                          style: TextStyle(color: Colors.black)),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -55,8 +61,10 @@ class LoadingPage extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.white, // Background color
+                        backgroundColor: Colors.white, // Background color
                       ),
+                      child: const Text('Loading',
+                          style: TextStyle(color: Colors.black)),
                     ),
                   ),
                 ),
