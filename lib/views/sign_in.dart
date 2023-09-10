@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iteach/utils/form_validator.dart';
 import 'package:iteach/views/welcome_back.dart';
 import 'package:iteach/components/round_button.dart';
+
+import '../services/auth.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -65,68 +68,19 @@ class SignInPage extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.all(screenWidth * 0.05),
-              child: Column(
-                children: [
-                  TextFormField(
-                    initialValue: 'Input',
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  TextFormField(
-                    initialValue: 'Input',
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.01),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        // Handle the "Password dimenticata?" action here
-                      },
-                      child: const Text(
-                        'Password dimenticata?',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const WelcomeBackPage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white, backgroundColor: const Color(0xFF0079D2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(screenWidth * 0.15),
-                        ),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth * 0.03),
-                        child: Text('Accedi', style: TextStyle(fontSize: screenHeight * 0.03)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: screenHeight * 0.04),
+              child: const SignInForm(),
+            ),
+            SizedBox(height: screenHeight * 0.02),
+            Padding(
+                padding: EdgeInsets.zero,
+                child: Column(children: [
                   Stack(
                     alignment: Alignment.center,
                     children: [
                       Container(
                         height: 1.0,
-                        margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                        margin: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.02),
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
@@ -141,7 +95,8 @@ class SignInPage extends StatelessWidget {
                       ),
                       Container(
                         color: Colors.white,
-                        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.02),
                         child: Text(
                           'or',
                           style: TextStyle(
@@ -153,7 +108,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.10),
+                  SizedBox(height: screenHeight * 0.05),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -180,11 +135,138 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ]))
           ],
         ),
+      ),
+    );
+  }
+}
+
+class SignInForm extends StatefulWidget {
+  const SignInForm({super.key});
+
+  @override
+  State<SignInForm> createState() => _SignInFormState();
+}
+
+class _SignInFormState extends State<SignInForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController(text: "test@test.com");
+  final _passwordController = TextEditingController(text: "testtest");
+  var loading = false;
+
+  void _submit() {
+    setState(() {
+      loading = true;
+    });
+    if (_formKey.currentState!.validate()) {
+      AuthService()
+          .loginEmail(
+            _emailController.text,
+            _passwordController.text,
+          )
+          .then((value) => {
+                if (value != null)
+                  {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WelcomeBackPage()),
+                    )
+                  }
+              })
+          .catchError((err) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(err.toString()),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return err;
+      }).whenComplete(() => setState(() {
+                loading = false;
+              }));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: _emailController,
+            decoration: const InputDecoration(
+              labelText: 'Email',
+              border: OutlineInputBorder(),
+            ),
+            validator: (value) {
+              return FormValidation.emptyValidator(value, "Inserisci l'email");
+            },
+          ),
+          SizedBox(height: screenHeight * 0.02),
+          TextFormField(
+            controller: _passwordController,
+            decoration: const InputDecoration(
+              labelText: 'Password',
+              border: OutlineInputBorder(),
+            ),
+            validator: (value) {
+              return FormValidation.emptyValidator(
+                  value, 'Inserisci la password');
+            },
+          ),
+          SizedBox(height: screenHeight * 0.01),
+          Align(
+            alignment: Alignment.centerRight,
+            child: TextButton(
+              onPressed: () {
+                // Handle the "Password dimenticata?" action here
+              },
+              child: const Text(
+                'Password dimenticata?',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.02),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: _submit,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF0079D2),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(screenWidth * 0.15),
+                ),
+              ),
+              label: !loading
+                  ? const Text('Accedi',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+                  : const SizedBox.shrink(),
+              icon: loading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        color: Colors.white,
+                        strokeWidth: 3,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.04),
+        ],
       ),
     );
   }

@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class WelcomeBackPage extends StatelessWidget {
   const WelcomeBackPage({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,7 +14,7 @@ class WelcomeBackPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Go back!'),
+          child: Text(FirebaseAuth.instance.currentUser!.email!),
         ),
       ),
     );
