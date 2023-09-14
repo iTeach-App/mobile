@@ -134,7 +134,7 @@ class CreateLecturePageState extends State<CreateLecturePage> {
                         pricePerHour = double.tryParse(value);
                       });
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Prezzo all\'ora',
                       border: OutlineInputBorder(),
                     ),

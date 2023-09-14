@@ -114,8 +114,7 @@ class LectureContainer extends StatelessWidget {
   final double titleTextSize; // Title text size
   final String? pricePerHour; // Price per hour data
 
-  const LectureContainer({
-    super.key,
+  const LectureContainer({super.key,
     required this.data,
     required this.onDelete,
     required this.iconData,
@@ -187,8 +186,7 @@ class LectureContainer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Chip(
                                 label: Text(
                                   'Prezzo all\'ora: ${pricePerHour ?? ''}',
