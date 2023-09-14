@@ -18,6 +18,7 @@ class CreateLecturePageState extends State<CreateLecturePage> {
   bool online = false;
   bool casaMia = false;
   bool possoSpostarmi = false;
+  double? pricePerHour;
 
   @override
   void initState() {
@@ -127,8 +128,13 @@ class CreateLecturePageState extends State<CreateLecturePage> {
                   ),
                   const SizedBox(height: 16.0),
                   TextFormField(
-                    initialValue: 'Input',
-                    decoration: const InputDecoration(
+                    controller: _moneyForMoving,
+                    onChanged: (value) {
+                      setState(() {
+                        pricePerHour = double.tryParse(value);
+                      });
+                    },
+                    decoration: InputDecoration(
                       labelText: 'Prezzo all\'ora',
                       border: OutlineInputBorder(),
                     ),
@@ -209,7 +215,6 @@ class CreateLecturePageState extends State<CreateLecturePage> {
     );
   }
 
-  // Function to save data and pop the page
   void _saveAndPop() {
     // Save the data you want to pass back to the previous screen
     Map<String, dynamic> data = {
@@ -218,9 +223,11 @@ class CreateLecturePageState extends State<CreateLecturePage> {
       'online': online,
       'casaMia': casaMia,
       'possoSpostarmi': possoSpostarmi,
+      'pricePerHour': _moneyForMoving.text,
     };
 
     // Pop the current page and pass back the data
     Navigator.pop(context, data);
   }
+
 }
