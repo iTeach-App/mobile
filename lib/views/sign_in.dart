@@ -47,7 +47,7 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: screenWidth * 0.6,
+                        width: screenWidth * 0.9,
                         child: Text(
                           'Accedi con il tuo indirizzo email oppure tramite i pulsanti social sottostanti.',
                           style: TextStyle(
@@ -59,7 +59,7 @@ class SignInPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: screenHeight * 0.03),
+                  SizedBox(height: screenHeight * 0.05),
                 ],
               ),
             ),

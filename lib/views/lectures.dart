@@ -55,7 +55,9 @@ class LecturesPageState extends State<LecturesPage> {
                   lectureDataList.removeAt(index);
                 });
               },
-            ),
+              iconData: Icons.info, // Replace with the icon you want
+            )
+
           );
         },
       ),
@@ -101,30 +103,65 @@ class LecturesPageState extends State<LecturesPage> {
 class LectureContainer extends StatelessWidget {
   final Map<String, dynamic> data;
   final VoidCallback onDelete;
+  final double iconSize; // Icon size
+  final IconData iconData; // Icon data to display
+  final double titleTextSize; // Title text size
 
-  const LectureContainer({super.key, required this.data, required this.onDelete});
+  const LectureContainer({
+    super.key,
+    required this.data,
+    required this.onDelete,
+    required this.iconData,
+    this.iconSize = 32.0,
+    this.titleTextSize = 18.0, // Specify the title text size
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      color: Colors.grey.withOpacity(0.2),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Title: ${data['title']}'),
-              IconButton(
-                icon: const Icon(Icons.close), // X button icon
-                onPressed: onDelete,
-              ),
-            ],
-          ),
-          Text('Subject: ${data['subject']}'),
-          // Add more data fields as needed
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0), // Add padding
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0), // Round corners
+          color: Colors.grey.withOpacity(0.2),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        iconData,
+                        size: iconSize, // Specify the icon size
+                      ), // Icon on the top-left corner
+                      SizedBox(width: 8.0), // Add spacing between icon and text
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${data['title']}',
+                            style: TextStyle(fontSize: titleTextSize), // Specify the title text size
+                          ),
+                          Text('${data['subject']}'),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.close), // X button icon
+                  onPressed: onDelete,
+                ),
+              ],
+            ),
+            // Add more data fields as needed with padding
+          ],
+        ),
       ),
     );
   }
