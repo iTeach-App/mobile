@@ -50,7 +50,9 @@ class LecturesPageState extends State<LecturesPage> {
               );
 
               if (result != null) {
-                // Handle updated data if needed
+                setState(() {
+                  lectureDataList.add(result);
+                });
               }
             },
             child: LectureContainer(
@@ -60,11 +62,17 @@ class LecturesPageState extends State<LecturesPage> {
                   lectureDataList.removeAt(index);
                 });
               },
-              iconData: Icons.info, // Replace with the icon you want
+              iconData: Icons.info,
               pricePerHour:
-                  pricePerHour, // Pass pricePerHour to LectureContainer
+                  pricePerHour,
+              options: [ // Pass the selected options here
+                if (lectureData['online']) 'Online',
+                if (lectureData['casaMia']) 'A casa mia',
+                if (lectureData['possoSpostarmi']) 'Posso spostarmi',
+              ],
             ),
           );
+
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -108,14 +116,16 @@ class LecturesPageState extends State<LecturesPage> {
 
 class LectureContainer extends StatelessWidget {
   final Map<String, dynamic> data;
+  final List<String> options;
   final VoidCallback onDelete;
   final double iconSize; // Icon size
   final IconData iconData; // Icon data to display
   final double titleTextSize; // Title text size
   final String? pricePerHour; // Price per hour data
 
-  const LectureContainer({super.key,
+  const LectureContainer({
     required this.data,
+    required this.options,
     required this.onDelete,
     required this.iconData,
     this.iconSize = 48.0, // Increase the icon size here
@@ -127,15 +137,14 @@ class LectureContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey.withOpacity(0.2),
-        ),
-        child: Stack(
-          // Wrap the content in a Stack
-          children: [
-            Column(
+      child: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.grey.withOpacity(0.3),
+            ),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
@@ -157,7 +166,7 @@ class LectureContainer extends StatelessWidget {
                           style: TextStyle(
                             fontSize: titleTextSize - 2.0,
                             // Reduce subject text size
-                            color: Colors.grey, // Change subject text color
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 4.0),
@@ -166,7 +175,6 @@ class LectureContainer extends StatelessWidget {
                           '${data['title']}',
                           style: TextStyle(
                             fontSize: titleTextSize,
-                            fontWeight: FontWeight.bold, // Make the title bold
                           ),
                         ),
                       ],
@@ -176,11 +184,9 @@ class LectureContainer extends StatelessWidget {
                 const SizedBox(height: 4.0), // Add spacing before the chips
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  // Enable horizontal scrolling
                   child: Row(
                     children: [
                       Container(
-                        // Create a container to align icon and first chip
                         alignment: Alignment.topLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,10 +195,10 @@ class LectureContainer extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 4.0),
                               child: Chip(
                                 label: Text(
-                                  'Prezzo all\'ora: ${pricePerHour ?? ''}',
+                                  '${pricePerHour ?? ''}€/h',
                                   style: TextStyle(
                                     fontSize: titleTextSize -
-                                        2.0, // Adjust the price text size
+                                        2.0,
                                   ),
                                 ),
                               ),
@@ -200,47 +206,48 @@ class LectureContainer extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // Add additional chips here with Padding
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Chip(
-                          label: Text(
-                            'Additional Chip 1',
-                            style: TextStyle(
-                              fontSize: titleTextSize - 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                        child: Chip(
-                          label: Text(
-                            'Additional Chip 2',
-                            style: TextStyle(
-                              fontSize: titleTextSize - 2.0,
-                            ),
-                          ),
-                        ),
-                      ),
                       // Add more chips as needed with Padding
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8.0), // Add spacing before the chip lists
+                Center( // Center the second row of chips horizontally
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (String option in options)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                          child: Chip(
+                            label: Text(
+                              option,
+                              style: TextStyle(
+                                fontSize: titleTextSize - 2.0,
+                              ),
+                            ),
+                            backgroundColor: Colors.grey.withOpacity(0.15), // Change chip color
+                          ),
+                        ),
                     ],
                   ),
                 ),
                 // Add more data fields as needed with padding
               ],
             ),
-            Positioned(
+          ),
+          Positioned(
               // Position the close button in the top right corner
-              top: 0,
-              right: 0,
-              child: IconButton(
-                icon: const Icon(Icons.close),
-                onPressed: onDelete,
+            top: 0,
+            right: 0,
+            child: IconButton(
+              icon: Icon(
+                Icons.close,
+                color: Colors.black, // Customize the color of the X icon
               ),
+              onPressed: onDelete,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
