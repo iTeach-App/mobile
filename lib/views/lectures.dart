@@ -10,7 +10,7 @@ class LecturesPage extends StatefulWidget {
 
 class LecturesPageState extends State<LecturesPage> {
   List<Map<String, dynamic>> lectureDataList =
-      []; // To store the data from CreateLecturePage
+      [];
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,7 @@ class LecturesPageState extends State<LecturesPage> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
+          color: Colors.black,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -37,7 +38,8 @@ class LecturesPageState extends State<LecturesPage> {
         itemBuilder: (context, index) {
           final lectureData = lectureDataList[index];
           final pricePerHour =
-              lectureData['pricePerHour']; // Access the pricePerHour value
+              lectureData['pricePerHour'];
+          final announcementType = lectureData['announcementType'];
 
           return GestureDetector(
             onTap: () async {
@@ -65,14 +67,15 @@ class LecturesPageState extends State<LecturesPage> {
               iconData: Icons.info,
               pricePerHour:
                   pricePerHour,
-              options: [ // Pass the selected options here
+              announcementType: announcementType,
+              descriptionLecture: lectureData['descriptionLecture'],
+              options: [
                 if (lectureData['online']) 'Online',
                 if (lectureData['casaMia']) 'A casa mia',
                 if (lectureData['possoSpostarmi']) 'Posso spostarmi',
               ],
             ),
           );
-
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -97,7 +100,7 @@ class LecturesPageState extends State<LecturesPage> {
           // Navigate to CreateLecturePage and await the result
           final result = await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateLecturePage()),
+            MaterialPageRoute(builder: (context) => CreateLecturePage()),
           );
 
           // Check if a result was returned
@@ -109,6 +112,7 @@ class LecturesPageState extends State<LecturesPage> {
           }
         },
         child: const Icon(Icons.add),
+        backgroundColor: const Color(0xFF0079D2), // Set the blue color
       ),
     );
   }
@@ -117,20 +121,24 @@ class LecturesPageState extends State<LecturesPage> {
 class LectureContainer extends StatelessWidget {
   final Map<String, dynamic> data;
   final List<String> options;
+  final String? announcementType;
   final VoidCallback onDelete;
-  final double iconSize; // Icon size
-  final IconData iconData; // Icon data to display
-  final double titleTextSize; // Title text size
-  final String? pricePerHour; // Price per hour data
+  final double iconSize;
+  final IconData iconData;
+  final double titleTextSize;
+  final String? pricePerHour;
+  final String? descriptionLecture;
 
   const LectureContainer({
     required this.data,
     required this.options,
     required this.onDelete,
     required this.iconData,
-    this.iconSize = 48.0, // Increase the icon size here
-    this.titleTextSize = 18.0, // Specify the title text size
+    this.iconSize = 48.0,
+    this.titleTextSize = 18.0,
     this.pricePerHour,
+    this.announcementType,
+    this.descriptionLecture,
   });
 
   @override
@@ -153,11 +161,10 @@ class LectureContainer extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: Icon(
                         Icons.assignment_turned_in_outlined,
-                        size: iconSize, // Icon size
+                        size: iconSize,
                       ),
                     ),
                     const SizedBox(width: 16.0),
-                    // Add spacing between icon and text
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -165,14 +172,12 @@ class LectureContainer extends StatelessWidget {
                           '${data['subject']}',
                           style: TextStyle(
                             fontSize: titleTextSize - 2.0,
-                            // Reduce subject text size
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         const SizedBox(height: 4.0),
-                        // Add spacing between subject and title
                         Text(
-                          '${data['title']}',
+                          '${announcementType ?? ''}',
                           style: TextStyle(
                             fontSize: titleTextSize,
                           ),
@@ -181,68 +186,67 @@ class LectureContainer extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4.0), // Add spacing before the chips
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                              child: Chip(
-                                label: Text(
-                                  '${pricePerHour ?? ''}€/h',
-                                  style: TextStyle(
-                                    fontSize: titleTextSize -
+                const SizedBox(height: 4.0),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Chip(
+                        label: Text(
+                          '${pricePerHour ?? ''}€/h',
+                          style: TextStyle(
+                            fontSize: titleTextSize -
                                         2.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                      // Add more chips as needed with Padding
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8.0), // Add spacing before the chip lists
-                Center( // Center the second row of chips horizontally
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      for (String option in options)
-                        Padding(
+                    ),
+                    if (descriptionLecture != null)
+                      Expanded(
+                        child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Chip(
-                            label: Text(
-                              option,
+                          child: Container(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text(
+                              '"${descriptionLecture}"',
                               style: TextStyle(
                                 fontSize: titleTextSize - 2.0,
                               ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            backgroundColor: Colors.grey.withOpacity(0.15), // Change chip color
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
-                // Add more data fields as needed with padding
+                const SizedBox(height: 8.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: options.map((option) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Chip(
+                        label: Text(
+                          option,
+                          style: TextStyle(
+                            fontSize: titleTextSize - 2.0,
+                          ),
+                        ),
+                        backgroundColor: Colors.grey.withOpacity(0.15),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ],
             ),
           ),
           Positioned(
-              // Position the close button in the top right corner
             top: 0,
             right: 0,
             child: IconButton(
               icon: Icon(
                 Icons.close,
-                color: Colors.black, // Customize the color of the X icon
+                color: Colors.black,
               ),
               onPressed: onDelete,
             ),

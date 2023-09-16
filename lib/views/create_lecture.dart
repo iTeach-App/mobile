@@ -10,15 +10,19 @@ class CreateLecturePage extends StatefulWidget {
 }
 
 class CreateLecturePageState extends State<CreateLecturePage> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _myAddressController = TextEditingController();
   final TextEditingController _moneyForMoving = TextEditingController();
+  final TextEditingController _announcementTypeController = TextEditingController();
+  final TextEditingController _descriptionOfLectureController = TextEditingController();
 
   bool online = false;
   bool casaMia = false;
   bool possoSpostarmi = false;
   double? pricePerHour;
+  bool confermaClicked = false; // Flag to track if "Conferma" button is clicked
 
   @override
   void initState() {
@@ -59,8 +63,14 @@ class CreateLecturePageState extends State<CreateLecturePage> {
         actions: [
           TextButton(
             onPressed: () {
-              // Add your functionality for the right text button here
-              _saveAndPop(); // Call this function to save the data and pop the page
+              // Set the confermaClicked flag to true when the button is clicked
+              setState(() {
+                confermaClicked = true;
+              });
+              // Validate the form before saving
+              if (_formKey.currentState!.validate() && (_hasSelection() || !confermaClicked)) {
+                _saveAndPop();
+              }
             },
             child: const Text(
               'Conferma',
@@ -72,130 +82,185 @@ class CreateLecturePageState extends State<CreateLecturePage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  TextFormField(
-                    controller: _titleController,
-                    decoration: const InputDecoration(
-                      labelText: 'Titolo dell\'annuncio',
-                      border: OutlineInputBorder(),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    TextFormField(
+                      controller: _announcementTypeController,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        labelText: 'Tipo di annuncio',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Inserisci il tipo di annuncio';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    '*required',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      '*required',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _subjectController,
-                    decoration: const InputDecoration(
-                      labelText: 'Materia',
-                      border: OutlineInputBorder(),
+                    const SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: _subjectController,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        labelText: 'Materia',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Inserisci la materia';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    '*required',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      '*required',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextFormField(
-                    initialValue: 'Input',
-                    decoration: const InputDecoration(
-                      labelText: 'Tipo di annuncio',
-                      border: OutlineInputBorder(),
+                    const SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: _descriptionOfLectureController,
+                      textCapitalization: TextCapitalization.sentences,
+                      decoration: const InputDecoration(
+                        labelText: 'Descrizione',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Inserisci la descrizione';
+                        }
+                        return null;
+                      },
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    '*required',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      '*required',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _moneyForMoving,
-                    onChanged: (value) {
+                    const SizedBox(height: 16.0),
+                    TextFormField(
+                      controller: _moneyForMoving,
+                      textCapitalization: TextCapitalization.sentences,
+                      onChanged: (value) {
+                        setState(() {
+                          pricePerHour = double.tryParse(value);
+                        });
+                      },
+                      decoration: const InputDecoration(
+                        labelText: 'Prezzo all\'ora',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Inserisci il prezzo all\'ora';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 8.0),
+                    const Text(
+                      '*required',
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 12.0,
+                      ),
+                    ),
+                    const SizedBox(height: 16.0),
+                    // New "Disponibilità" text box
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          const TextSpan(
+                            text: 'Disponibilità ',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                          if (!online && !casaMia && !possoSpostarmi && confermaClicked)
+                            TextSpan(
+                              text: '*',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 8.0),
+                    // Three tickable options with descriptions on the left and checkboxes on the right
+                    buildCheckboxOption('Online', online, (value) {
                       setState(() {
-                        pricePerHour = double.tryParse(value);
+                        online = value ?? false;
                       });
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Prezzo all\'ora',
-                      border: OutlineInputBorder(),
+                    }),
+                    const SizedBox(height: 8.0),
+                    buildCheckboxOption('A casa mia', casaMia, (value) {
+                      setState(() {
+                        casaMia = value ?? false;
+                      });
+                    }),
+                    const SizedBox(height: 8.0),
+                    buildCheckboxOption('Posso spostarmi', possoSpostarmi, (value) {
+                      setState(() {
+                        possoSpostarmi = value ?? false;
+                      });
+                    }),
+                    const SizedBox(height: 16.0),
+                    // Two additional text input boxes with the same style
+                    Visibility(
+                      visible: casaMia, // Show the TextFormField only if casaMia is true
+                      child: TextFormField(
+                        controller: _myAddressController,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: const InputDecoration(
+                          labelText: 'Il mio indirizzo',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  const Text(
-                    '*required',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 12.0,
+                    const SizedBox(height: 16.0),
+                    Visibility(
+                      visible: possoSpostarmi, // Show the TextFormField only if casaMia is true
+                      child: TextFormField(
+                        controller: _moneyForMoving,
+                        textCapitalization: TextCapitalization.sentences,
+                        decoration: const InputDecoration(
+                          labelText: 'Incremento per lo spostamento',
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  // New "Disponibilità" text box
-                  const Text(
-                    'Disponibilità',
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  // Three tickable options with descriptions on the left and checkboxes on the right
-                  buildCheckboxOption('Online', online, (value) {
-                    setState(() {
-                      online = value ?? false;
-                    });
-                  }),
-                  const SizedBox(height: 8.0),
-                  buildCheckboxOption('A casa mia', casaMia, (value) {
-                    setState(() {
-                      casaMia = value ?? false;
-                    });
-                  }),
-                  const SizedBox(height: 8.0),
-                  buildCheckboxOption('Posso spostarmi', possoSpostarmi, (value) {
-                    setState(() {
-                      possoSpostarmi = value ?? false;
-                    });
-                  }),
-                  const SizedBox(height: 16.0),
-                  // Two additional text input boxes with the same style
-                  TextFormField(
-                    controller: _myAddressController,
-                    decoration: const InputDecoration(
-                      labelText: 'Il mio indirizzo',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16.0),
-                  TextFormField(
-                    controller: _moneyForMoving,
-                    decoration: const InputDecoration(
-                      labelText: 'Incremento per lo spostamento',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -215,6 +280,10 @@ class CreateLecturePageState extends State<CreateLecturePage> {
     );
   }
 
+  bool _hasSelection() {
+    return online || casaMia || possoSpostarmi;
+  }
+
   void _saveAndPop() {
     // Save the data you want to pass back to the previous screen
     Map<String, dynamic> data = {
@@ -224,10 +293,11 @@ class CreateLecturePageState extends State<CreateLecturePage> {
       'casaMia': casaMia,
       'possoSpostarmi': possoSpostarmi,
       'pricePerHour': _moneyForMoving.text,
+      'announcementType': _announcementTypeController.text, // Include announcementType
+      'descriptionLecture': _descriptionOfLectureController.text,
     };
 
     // Pop the current page and pass back the data
     Navigator.pop(context, data);
   }
-
 }
