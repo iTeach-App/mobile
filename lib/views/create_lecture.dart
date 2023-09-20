@@ -17,6 +17,7 @@ class CreateLecturePageState extends State<CreateLecturePage> {
   final TextEditingController _moneyForMoving = TextEditingController();
   final TextEditingController _announcementTypeController = TextEditingController();
   final TextEditingController _descriptionOfLectureController = TextEditingController();
+  final TextEditingController _pricePerHourController = TextEditingController();
 
   bool online = false;
   bool casaMia = false;
@@ -161,7 +162,7 @@ class CreateLecturePageState extends State<CreateLecturePage> {
                     ),
                     const SizedBox(height: 16.0),
                     TextFormField(
-                      controller: _moneyForMoving,
+                      controller: _pricePerHourController,
                       textCapitalization: TextCapitalization.sentences,
                       onChanged: (value) {
                         setState(() {
@@ -201,7 +202,7 @@ class CreateLecturePageState extends State<CreateLecturePage> {
                             ),
                           ),
                           if (!online && !casaMia && !possoSpostarmi && confermaClicked)
-                            TextSpan(
+                            const TextSpan(
                               text: '*',
                               style: TextStyle(
                                 fontSize: 16.0,
@@ -292,9 +293,10 @@ class CreateLecturePageState extends State<CreateLecturePage> {
       'online': online,
       'casaMia': casaMia,
       'possoSpostarmi': possoSpostarmi,
-      'pricePerHour': _moneyForMoving.text,
+      'pricePerHour': _pricePerHourController.text,
       'announcementType': _announcementTypeController.text, // Include announcementType
       'descriptionLecture': _descriptionOfLectureController.text,
+      'moneyForMoving': _moneyForMoving.text,
     };
 
     // Pop the current page and pass back the data

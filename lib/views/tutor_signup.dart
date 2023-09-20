@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iteach/views/lectures.dart';
+import 'package:iteach/components/bottombar_tutor.dart';
 
 class TutorSignUpPage extends StatelessWidget {
   const TutorSignUpPage({Key? key}) : super(key: key);
@@ -101,7 +101,7 @@ class TutorSignUpPage extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const LecturesPage()),
+                            MaterialPageRoute(builder: (context) => const BottomBarTutorPage()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

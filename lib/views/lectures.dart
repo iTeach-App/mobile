@@ -33,7 +33,21 @@ class LecturesPageState extends State<LecturesPage> {
           },
         ),
       ),
-      body: ListView.builder(
+      body: lectureDataList.isEmpty
+          ? const Center(
+        child: Padding(
+          padding: EdgeInsets.all(16.0), // Add padding here
+          child: Text(
+            'Clicca sul pulsante "+" per creare una nuova lezione!',
+            style: TextStyle(
+              fontSize: 18.0,
+              color: Colors.black,
+            ),
+            textAlign: TextAlign.center, // Center-align the text
+          ),
+        ),
+      )
+          : ListView.builder(
         itemCount: lectureDataList.length,
         itemBuilder: (context, index) {
           final lectureData = lectureDataList[index];
@@ -78,29 +92,15 @@ class LecturesPageState extends State<LecturesPage> {
           );
         },
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Lezioni',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline_rounded),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profilo',
-          ),
-        ],
-      ),
+
+
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           // Navigate to CreateLecturePage and await the result
           final result = await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateLecturePage()),
+            MaterialPageRoute(builder: (context) => const CreateLecturePage()),
           );
 
           // Check if a result was returned
@@ -111,8 +111,8 @@ class LecturesPageState extends State<LecturesPage> {
             });
           }
         },
-        child: const Icon(Icons.add),
-        backgroundColor: const Color(0xFF0079D2), // Set the blue color
+        backgroundColor: const Color(0xFF0079D2),
+        child: const Icon(Icons.add), // Set the blue color
       ),
     );
   }
@@ -129,7 +129,7 @@ class LectureContainer extends StatelessWidget {
   final String? pricePerHour;
   final String? descriptionLecture;
 
-  const LectureContainer({
+  const LectureContainer({super.key,
     required this.data,
     required this.options,
     required this.onDelete,
@@ -177,7 +177,7 @@ class LectureContainer extends StatelessWidget {
                         ),
                         const SizedBox(height: 4.0),
                         Text(
-                          '${announcementType ?? ''}',
+                          announcementType ?? '',
                           style: TextStyle(
                             fontSize: titleTextSize,
                           ),
@@ -208,7 +208,7 @@ class LectureContainer extends StatelessWidget {
                           child: Container(
                             padding: const EdgeInsets.all(4.0),
                             child: Text(
-                              '"${descriptionLecture}"',
+                              '"$descriptionLecture"',
                               style: TextStyle(
                                 fontSize: titleTextSize - 2.0,
                               ),
@@ -244,7 +244,7 @@ class LectureContainer extends StatelessWidget {
             top: 0,
             right: 0,
             child: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.close,
                 color: Colors.black,
               ),

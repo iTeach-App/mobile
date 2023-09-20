@@ -49,7 +49,7 @@ class SignInPage extends StatelessWidget {
                       SizedBox(
                         width: screenWidth * 0.9,
                         child: Text(
-                          'Accedi con il tuo indirizzo email oppure tramite i pulsanti social sottostanti.',
+                          'Accedi tramite il tuo indirizzo email oppure utilizzando i pulsanti social sottostanti.',
                           style: TextStyle(
                             fontSize: screenHeight * 0.02,
                             color: Colors.grey,
