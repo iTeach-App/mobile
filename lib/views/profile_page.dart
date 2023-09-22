@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 16), // Add vertical spacing between the image and text
               // User Info (First Name and Last Name)
               const Text(
-                'Michele Dalle Downz',
+                'Giovanni Bassi',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -226,7 +226,7 @@ class ProfilePage extends StatelessWidget {
               ),
               const SizedBox(height: 40), // Add vertical spacing between buttons and text field
               Padding(
-                padding: const EdgeInsets.only(left: 16.0, right: 16.0), // Add left and right padding
+                padding: const EdgeInsets.only(left: 10.0, right: 10.0), // Add left and right padding
                 child: Align(
                   alignment: Alignment.centerLeft, // Align text field to the left
                   child: TextFormField(
@@ -234,7 +234,7 @@ class ProfilePage extends StatelessWidget {
                       labelText: 'Informazioni personali', // Add your label text here
                       labelStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18, // Adjust the font size as needed
+                        fontSize: 20, // Adjust the font size as needed
                         color: Colors.black, // Set the text color to black
                       ),
                       enabledBorder: const UnderlineInputBorder(
@@ -250,7 +250,163 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-
+              const SizedBox(height: 20),
+          const Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0), // Add left and right padding
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Nome:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Giovanni Bassi',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'E-mail:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'bassgio81@gmail.com',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Telefono:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '+39 3425912132',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Indirizzo:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Via Geo Fiko, 69',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Data di nascita:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '23/09/2002',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Password:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text(
+                        'Cambia',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue, // Set the text color to blue
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Titolo di studio:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Diploma',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10), // Adjust the spacing between rows as needed
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Curriculum Vitae:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: null,
+                      child: Text(
+                        'Carica',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue, // Set the text color to blue
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                // Add more rows as needed
+              ],
+            ),
+          )
 
             ],
           ),
