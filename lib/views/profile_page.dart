@@ -1,7 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'dart:io'; // For File class
 
-class ProfilePage extends StatelessWidget {
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  PDFDocument? pdfDocument;
+  String? pdfFilePath;
+
+
+  Future<void> loadPDF() async {
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null) {
+      final filePath = result.files.single.path;
+      setState(() {
+        pdfFilePath = filePath;
+      });
+
+      if (filePath != null) {
+        pdfDocument = await PDFDocument.fromFile(File(filePath));
+      }
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -251,11 +283,11 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-          const Padding(
+           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0), // Add left and right padding
             child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -271,8 +303,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), // Adjust the spacing between rows as needed
-                Row(
+                const SizedBox(height: 20), // Adjust the spacing between rows as needed
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -288,8 +320,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), // Adjust the spacing between rows as needed
-                Row(
+                const SizedBox(height: 20), // Adjust the spacing between rows as needed
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -305,8 +337,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), // Adjust the spacing between rows as needed
-                Row(
+                const SizedBox(height: 20), // Adjust the spacing between rows as needed
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -322,8 +354,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20), // Adjust the spacing between rows as needed
-                Row(
+                const SizedBox(height: 20), // Adjust the spacing between rows as needed
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -339,8 +371,50 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10), // Adjust the spacing between rows as needed
+                const SizedBox(height: 20), // Adjust the spacing between rows as needed
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Titolo di studio:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Diploma',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10), // Adjust the spacing between rows as needed
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Curriculum Vitae:',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        loadPDF();
+                      },
+                      child: const Text(
+                        'Carica',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                //SizedBox(height: 10), // Adjust the spacing between rows as needed
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
@@ -362,56 +436,28 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 10), // Adjust the spacing between rows as needed
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Titolo di studio:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'Diploma',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10), // Adjust the spacing between rows as needed
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Curriculum Vitae:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: null,
-                      child: Text(
-                        'Carica',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.blue, // Set the text color to blue
+              const SizedBox(height: 8),
+                Visibility(
+                  visible: pdfFilePath != null,
+                  child: Column(
+                    children: [
+                      if (pdfFilePath != null)
+                        SizedBox(
+                          height: 400,
+                          child: PDFViewer(document: pdfDocument!),
                         ),
-                      ),
-                    ),
-                  ],
+                      const SizedBox(height: 8),
+                      // Add more rows or widgets as needed
+                    ],
+                  ),
                 ),
-                SizedBox(height: 8),
-                // Add more rows as needed
               ],
-            ),
-          )
-
-            ],
           ),
         ),
+            ],
       ),
+    ),
+    ),
     );
   }
 }
