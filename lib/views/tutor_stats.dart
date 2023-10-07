@@ -18,12 +18,15 @@ class TutorStatsPage extends StatelessWidget {
             Navigator.of(context).pop();
           },
         ),
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Theme
+            .of(context)
+            .scaffoldBackgroundColor,
         actions: [
           Padding(
             padding: EdgeInsets.all(8.0), // Add the desired padding
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/profile_image.jpg'), // Replace with your image path
+              backgroundImage: AssetImage(
+                  'assets/profile_image.jpg'), // Replace with your image path
             ),
           ),
         ],
@@ -38,7 +41,8 @@ class TutorStatsPage extends StatelessWidget {
           Divider(),
           _buildListTile("Title 3", "Data 3", Icons.ac_unit_rounded),
           Divider(),
-          _buildListTile("Title 3", "Data 3", Icons.baby_changing_station_rounded),
+          _buildListTile(
+              "Title 3", "Data 3", Icons.baby_changing_station_rounded),
           Divider(),
           _buildListTile("Title 3", "Data 3", Icons.cabin_rounded),
           Divider(),
@@ -68,3 +72,4 @@ class TutorStatsPage extends StatelessWidget {
     );
   }
 
+}
