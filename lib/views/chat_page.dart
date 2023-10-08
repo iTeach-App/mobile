@@ -24,19 +24,16 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
       return Scaffold(
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AppBar(
               backgroundColor: Colors.white,
-              title: Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 10),
-                child: Text(
-                      "Conversations",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
+              title: Text(
+                "Chat",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
               ),
+              centerTitle: true, // Center the title text
             ),
             Padding(
               padding: EdgeInsets.only(top: 16, left: 16, right: 16),
@@ -62,19 +59,21 @@ class _ChatPageState extends State<ChatPage> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 12), // Add some spacing between the two containers
+                  SizedBox(width: 8), // Add some spacing between the two containers
                   Container(
                     height: 50,
+                    width: 110,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.blue[50],
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center, // Center the Row contents horizontally
                       children: <Widget>[
                         Icon(Icons.add, color: Colors.blue, size: 20),
                         SizedBox(width: 2),
                         Text(
-                          "Add New",
+                          "Aggiungi",
                           style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                       ],
