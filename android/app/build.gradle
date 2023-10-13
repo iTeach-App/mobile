@@ -5,6 +5,14 @@ if (localPropertiesFile.exists()) {
         localProperties.load(reader)
     }
 }
+def envVariables = [
+        PUBLIC_TOKEN: project.hasProperty('PUBLIC_TOKEN')
+                ? PUBLIC_TOKEN
+                : 'batcave',
+        SECRET_ACCESS_KEY: project.hasProperty('SECRET_ACCESS_KEY')
+                ? SECRET_ACCESS_KEY
+                : 'quel downz di mikele',
+];
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
@@ -20,6 +28,7 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+
 
 apply plugin: 'com.android.application'
 // START: FlutterFire Configuration
@@ -54,6 +63,8 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        resValue "string","public_token", envVariables.PUBLIC_TOKEN
+        resValue "string","secret_access_key", envVariables.SECRET_ACCESS_KEY
     }
 
     buildTypes {
@@ -72,3 +83,4 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
