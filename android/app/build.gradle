@@ -6,12 +6,8 @@ if (localPropertiesFile.exists()) {
     }
 }
 def envVariables = [
-        PUBLIC_TOKEN: project.hasProperty('PUBLIC_TOKEN')
-                ? PUBLIC_TOKEN
-                : 'batcave',
-        SECRET_ACCESS_KEY: project.hasProperty('SECRET_ACCESS_KEY')
-                ? SECRET_ACCESS_KEY
-                : 'quel downz di mikele',
+        MAPBOX_PUBLIC_KEY: MAPBOX_PUBLIC_KEY,
+        MAPBOX_SECRET_KEY: MAPBOX_SECRET_KEY,
 ];
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
@@ -59,12 +55,14 @@ android {
         applicationId "it.iteachapp.iteach"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        resValue "string","public_token", envVariables.PUBLIC_TOKEN
-        resValue "string","secret_access_key", envVariables.SECRET_ACCESS_KEY
+        multiDexEnabled true
+        
+        resValue "string", "MAPBOX_SECRET_KEY", envVariables.MAPBOX_SECRET_KEY
+        resValue "string", "MAPBOX_PUBLIC_KEY", envVariables.MAPBOX_PUBLIC_KEY
     }
 
     buildTypes {
@@ -82,5 +80,6 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
 
